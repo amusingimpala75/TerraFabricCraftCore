@@ -1,6 +1,12 @@
 TerraFirmaCraft
 =======
 
+***This repository is an archive. It is no longer active.***
+
+*The contents of this readme has been hidden by HTML comment, you can still view it by opening the raw file.*
+
+<!--
+
 ## Table of Contents
 
 * [About](#about)
