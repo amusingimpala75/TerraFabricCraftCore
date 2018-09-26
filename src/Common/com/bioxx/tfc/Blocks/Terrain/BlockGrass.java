@@ -264,13 +264,12 @@ public class BlockGrass extends BlockTerra
 
 				if (y > 0)
 				{
-					float rain = TFC_Climate.getRainfall(world, x, y, z);
 					Block id = world.getBlock(x, y, z);
 					int meta = world.getBlockMetadata(x, y, z);
 
 					//Spread to other blocks
 					if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0)
-						world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
+						world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, TFC_Climate.getRainfall(world, x, y, z)), meta, 0x2);
 					else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0)
 						world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
 					else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0)
@@ -295,10 +294,14 @@ public class BlockGrass extends BlockTerra
 		{
 			Block block = chunk.getBlock(xCoord, y, zCoord);
 			Material material = block.getMaterial();
-			boolean solidTopOrBottom = world.isSideSolid(x, y, z, ForgeDirection.UP) || world.isSideSolid(x, y, z, ForgeDirection.DOWN);
 
-			if (block.isOpaqueCube() && block.renderAsNormalBlock() && solidTopOrBottom &&
-				material.blocksMovement() && material != Material.leaves && material != Material.water && !block.isFoliage(world, x, y, z))
+			if (block.isOpaqueCube()
+					&& material.isOpaque()
+					&& block.renderAsNormalBlock()
+					&& material != Material.leaves && material != Material.water
+					&& material.blocksMovement()
+					&& !block.isFoliage(world, x, y, z)
+					&& (block.isSideSolid(world, x, y, z, ForgeDirection.UP) || block.isSideSolid(world, x, y, z, ForgeDirection.DOWN)))
 			{
 				return y;
 			}

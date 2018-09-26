@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -67,18 +68,18 @@ public class WorldGenBerryBush extends WorldGenerator
 	public boolean createBush(World world, Random random, int i, int j, int k, FloraIndex fi)
 	{
 		Block id = world.getBlock(i, j-1, k);
-		if ((world.canBlockSeeTheSky(i, j, k) || world.getBlockLightValue(i, j, k) > 8) &&
-			(TFC_Core.isSoil(id) && underBlock == Blocks.air ||
-				id == underBlock ||
-				TFC_Core.isGrass(underBlock) && id == TFC_Core.getTypeForSoil(underBlock)))
+		if ((world.canBlockSeeTheSky(i, j, k) || world.getBlockLightValue(i, j, k) > 8) && (TFC_Core.isSoil(id) && underBlock == Blocks.air || id == underBlock || TFC_Core.isGrass(underBlock) && id == TFC_Core.getTypeForSoil(underBlock)))
 		{
-			for(short h = 0; h < bushHeight && random.nextBoolean(); h++) 
+			for(int h = 0; h < bushHeight && random.nextBoolean(); h++)
 			{
 				world.setBlock(i, j+h, k, TFCBlocks.berryBush, meta, 2);
-				if(TFC_Time.getSeasonAdjustedMonth(k) > fi.harvestStart && TFC_Time.getSeasonAdjustedMonth(k) < fi.harvestFinish+fi.fruitHangTime)
+				if (TFC_Time.getSeasonAdjustedMonth(k) > fi.harvestStart && TFC_Time.getSeasonAdjustedMonth(k) < fi.harvestFinish+fi.fruitHangTime)
 				{
-					TEBerryBush te = (TEBerryBush) world.getTileEntity(i, j+h, k);
-					te.hasFruit = true;
+					TileEntity te = world.getTileEntity(i, j + h, k);
+					if (te instanceof TEBerryBush)
+					{
+						((TEBerryBush) te).hasFruit = true;
+					}
 				}
 			}
 			return true;

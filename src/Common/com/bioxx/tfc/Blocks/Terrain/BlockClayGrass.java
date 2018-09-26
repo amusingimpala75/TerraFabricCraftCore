@@ -70,12 +70,13 @@ public class BlockClayGrass extends BlockGrass
 	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		if (world.getBlock(x, y + 1, z).isSideSolid(world, x, y + 1, z, ForgeDirection.DOWN))
+		{
 			world.setBlock(x, y, z, TFC_Core.getTypeForClay(world.getBlockMetadata(x, y, z) + textureOffset), world.getBlockMetadata(x, y, z), 0x2);
+		}
 		else if (world.canBlockSeeTheSky(x, y + 1, z))
 		{
 			spreadGrass(world, x, y, z, rand);
 		}
-
 		world.markBlockForUpdate(x, y, z);
 	}
 }

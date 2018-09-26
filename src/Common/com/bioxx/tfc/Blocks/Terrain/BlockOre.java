@@ -269,8 +269,14 @@ public class BlockOre extends BlockCollapsible
 	{
 		if (!world.isRemote)
 		{
-			TEOre te = (TEOre)world.getTileEntity(x, y, z);
-			if((te.extraData & 8) == 0 && y < 255 && y > 0)
+			TileEntity te = world.getTileEntity(x, y, z);
+			if (!(te instanceof TEOre))
+			{
+				TerraFirmaCraft.LOG.warn("TE was not ore on call of BlockOre.scanVisible({}, {}, {}, {})", world, x, y, z);
+				return;
+			}
+
+			if ((((TEOre) te).extraData & 8) == 0 && y < 255 && y > 0)
 			{
 				if(world.blockExists(x, y-1, z) && world.blockExists(x, y+1, z) && world.blockExists(x-1, y, z) && world.blockExists(x+1, y, z) &&
 						world.blockExists(x, y, z-1) && world.blockExists(x, y, z+1))
@@ -278,7 +284,7 @@ public class BlockOre extends BlockCollapsible
 							!world.getBlock(x - 1, y, z).isOpaqueCube() || !world.getBlock(x + 1, y, z).isOpaqueCube() || 
 							!world.getBlock(x, y, z - 1).isOpaqueCube() || !world.getBlock(x, y, z + 1).isOpaqueCube())
 					{
-						te.setVisible();
+						((TEOre) te).setVisible();
 					}
 			}
 		}
@@ -287,7 +293,7 @@ public class BlockOre extends BlockCollapsible
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		if(!world.isRemote)
+		if (!world.isRemote)
 		{
 			scanVisible(world, x, y, z);
 		}

@@ -18,6 +18,7 @@ public class BlockSedCobble extends BlockCobble
 	@Override
 	public int tickRate(World world)
 	{
-		return 3;
+//		return 3;
+		return 20;
 	}
 }

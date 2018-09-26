@@ -59,9 +59,9 @@ public class BlockCollapsible extends BlockTerraContainer
 
 	public static boolean canFallBelow(World world, int x, int y, int z)
 	{
-		if (world.isAirBlock(x, y, z))
-			return true;
 		Block block = world.getBlock(x, y, z);
+		if (block.isAir(world, x, y, z))
+			return true;
 		if (block == Blocks.fire)
 			return true;
 		if (block == TFCBlocks.tallGrass)
@@ -164,24 +164,113 @@ public class BlockCollapsible extends BlockTerraContainer
 		return false;
 	}*/
 
+	public static void updateTickCollapsible(World world, int i, int j, int k, Random random, Block us, boolean checkForSupport)
+	{
+		if (world.isRemote) return;
+
+		if (canFallBelow(world, i, j-1, k))
+		{
+			if (checkForSupport && isNearSupport(world, i, j, k, 4, 0)) return; // Inside the if so it's only called when needed.
+			tryToFall(world, i, j, k, us);
+			return;
+		}
+
+		int airSides = 0;
+		boolean sides[] = new boolean[4];
+
+		if (world.isAirBlock(i+1, j, k))
+		{
+			airSides++;
+			if (canFallBelow(world, i+1, j-1, k))
+				sides[0] = true;
+		}
+		if (world.isAirBlock(i, j, k+1))
+		{
+			airSides++;
+			if (canFallBelow(world, i, j-1, k+1))
+				sides[1] = true;
+		}
+		if (world.isAirBlock(i-1, j, k))
+		{
+			airSides++;
+			if (canFallBelow(world, i-1, j-1, k))
+				sides[2] = true;
+		}
+		if (world.isAirBlock(i, j, k-1))
+		{
+			airSides++;
+			if (canFallBelow(world, i, j-1, k-1))
+				sides[3] = true;
+		}
+
+		if (airSides > 2 && (sides[0] || sides[1] || sides[2] || sides[3]))
+		{
+			if (checkForSupport && isNearSupport(world, i, j, k, 4, 0)) return; // Inside the if so it's only called when needed.
+			int meta = world.getBlockMetadata(i, j, k);
+			world.setBlockToAir(i, j, k);
+			int rng = random.nextInt(4); // Pick a random number (0->3)
+			while (!sides[rng]) // Pick the next side that is available.
+			{
+				rng = (rng + 1) % 4;
+			}
+			switch (rng)
+			{
+				case 0:
+				{
+					world.setBlock(i+1, j, k, us, meta, 0x2);
+					tryToFall(world, i + 1, j, k, us);
+					break;
+				}
+				case 1:
+				{
+					world.setBlock(i, j, k+1, us, meta, 0x2);
+					tryToFall(world, i, j, k + 1, us);
+					break;
+				}
+				case 2:
+				{
+					world.setBlock(i-1, j, k, us, meta, 0x2);
+					tryToFall(world, i - 1, j, k, us);
+					break;
+				}
+				case 3:
+				{
+					world.setBlock(i, j, k-1, us, meta, 0x2);
+					tryToFall(world, i, j, k - 1, us);
+					break;
+				}
+			}
+		}
+	}
+
 	public static Boolean isNearSupport(World world, int i, int j, int k, int range, float collapseChance)
 	{
-		for(int y = -1; y <= 1; y++)
+		if (world == null) return false; // Adding world null check due to OpenEye NPE report.
+		if (!world.doChunksNearChunkExist(i, j, k, range + 1)) return true; // If chunks are not loaded, assume it's supported.
+		for (int y = -1; y <= 1; y++) // This chunk is loaded, shortcut vertical support.
 		{
-			for(int x = -range; x <= range; x++)
+			if (TFC_Core.isVertSupport(world.getBlock(i, j + y, k)))
 			{
-				for(int z = -range; z <= range; z++)
+				return true;
+			}
+		}
+		for (int x = -range; x <= range; x++)
+		{
+			for (int z = -range; z <= range; z++)
+			{
+				for (int y = -1; y <= 1; y++)
 				{
-					// Adding world null check due to OpenEye NPE report.
-					if (x == 0 && z == 0 && world != null && TFC_Core.isVertSupport(world.getBlock(i + x, j + y, k + z)))
+					if (TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
 					{
-						return true;
-					}
-					if (world != null && TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
-					{
-						if(world.rand.nextFloat() < collapseChance / 100f)
+						// Might still collapse
+						if (world.rand.nextFloat() < collapseChance / 100f)
+						{
 							world.setBlockToAir(i + x, j + y, k + z);
-						else return true;
+						}
+						else
+						{
+							return true;
+						}
 					}
 				}
 			}
@@ -201,96 +290,99 @@ public class BlockCollapsible extends BlockTerraContainer
 
 	public Boolean tryToCollapse(World world, int x, int y, int z, float collapseChance)
 	{
+		if (world.isRemote)
+			return false;
+
 		int[] drop = getDropBlock(world, x, y, z);
 		Block fallingBlock = Block.getBlockById(drop[0]);
+
+		if (fallingBlock == Blocks.air)
+			return false;
 
 		if (world.getBlock(x, y, z) == Blocks.bedrock || world.getBlock(x, y, z) == fallingBlock)
 			return false;
 
 		int fallingBlockMeta = drop[1];
-		if (canFallBelow(world, x, y - 1, z) && !isNearSupport(world, x, y, z, 4, collapseChance) && isUnderLoad(world, x, y, z))
+		if (canFallBelow(world, x, y - 1, z) && isUnderLoad(world, x, y, z) && !isNearSupport(world, x, y, z, 4, collapseChance))
 		{
-			if (!world.isRemote && fallingBlock != Blocks.air)
+			if (fallingBlock != null)
 			{
-				if(fallingBlock != null)
+				EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, fallingBlock, fallingBlockMeta);
+
+				// Cobble generated from caving in raw stone has different metadata for different drops/hardness.
+				if (this instanceof BlockStone)
+					ent = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, fallingBlock, fallingBlockMeta + 8);
+
+				ent.aliveTimer/*fallTime*/ = -5000;
+				world.spawnEntityInWorld(ent);
+				Random r = new Random(x*y+z);
+				if(r.nextInt(100) > 90)
 				{
-					EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, fallingBlock, fallingBlockMeta);
-
-					// Cobble generated from caving in raw stone has different metadata for different drops/hardness.
-					if (this instanceof BlockStone)
-						ent = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, fallingBlock, fallingBlockMeta + 8);
-
-					ent.aliveTimer/*fallTime*/ = -5000;
-					world.spawnEntityInWorld(ent);
-					Random r = new Random(x*y+z);
-					if(r.nextInt(100) > 90)
-						world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKLONG, 1.0F, 0.8F + (r.nextFloat()/2));
+					world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKLONG, 1.0F, 0.8F + (r.nextFloat()/2));
 				}
-
-				if (world.getBlock(x, y, z) instanceof BlockOre && !TFCOptions.enableCaveInsDestroyOre)
-				{
-					TFC_Core.setBlockToAirWithDrops(world, x, y, z);
-				}
-				else
-					world.setBlockToAir(x, y, z);
-
-				if(world.getBlock(x, y-1, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-1, z)).blockType == this && 
-						((TEPartial)world.getTileEntity(x, y-1, z)).metaID == fallingBlockMeta)
-				{
-					world.setBlockToAir(x, y-1, z);
-
-					if(world.getBlock(x, y-2, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-2, z)).blockType == this && 
-							((TEPartial)world.getTileEntity(x, y-2, z)).metaID == fallingBlockMeta)
-					{
-						world.setBlockToAir(x, y-2, z);
-
-						if(world.getBlock(x, y-3, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-3, z)).blockType == this && 
-								((TEPartial)world.getTileEntity(x, y-3, z)).metaID == fallingBlockMeta)
-							world.setBlockToAir(x, y-3, z);
-					}
-				}
-
-				return true;
 			}
+
+			if (world.getBlock(x, y, z) instanceof BlockOre && !TFCOptions.enableCaveInsDestroyOre)
+			{
+				TFC_Core.setBlockToAirWithDrops(world, x, y, z);
+			}
+			else
+			{
+				world.setBlockToAir(x, y, z);
+			}
+
+			if(world.getBlock(x, y-1, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-1, z)).blockType == this &&
+					((TEPartial)world.getTileEntity(x, y-1, z)).metaID == fallingBlockMeta)
+			{
+				world.setBlockToAir(x, y-1, z);
+
+				if(world.getBlock(x, y-2, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-2, z)).blockType == this &&
+						((TEPartial)world.getTileEntity(x, y-2, z)).metaID == fallingBlockMeta)
+				{
+					world.setBlockToAir(x, y-2, z);
+
+					if(world.getBlock(x, y-3, z) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(x, y-3, z)).blockType == this &&
+							((TEPartial)world.getTileEntity(x, y-3, z)).metaID == fallingBlockMeta)
+						world.setBlockToAir(x, y-3, z);
+				}
+			}
+
+			return true;
 		}
 		return false;
 	}
 
 	public static void tryToFall(World world, int x, int y, int z, Block block)
 	{
-		if (!world.isRemote)
+		if (world.isRemote) return;
+
+		int meta = world.getBlockMetadata(x, y, z);
+		if (canFallBelow(world, x, y - 1, z) && y >= 0 && (block instanceof BlockSand || !isNearSupport(world, x, y, z, 4, 0)))
 		{
-
-			int meta = world.getBlockMetadata(x, y, z);
-			if (canFallBelow(world, x, y - 1, z) && y >= 0 && (!isNearSupport(world, x, y, z, 4, 0) || block instanceof BlockSand))
+			if (!fallInstantly && world.checkChunksExist(x - 32, y - 32, z - 32, x + 32, y + 32, z + 32))
 			{
-				byte byte0 = 32;
-
-				if (!fallInstantly && world.checkChunksExist(x - byte0, y - byte0, z - byte0, x + byte0, y + byte0, z + byte0))
+				if (!world.isRemote)
 				{
-					if (!world.isRemote)
-					{
-						EntityFallingBlockTFC entityfallingblock = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, block, meta);
-						world.spawnEntityInWorld(entityfallingblock);
-						if (block instanceof BlockCobble)
-							world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (world.rand.nextFloat() / 2));
-						else
-							world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (world.rand.nextFloat() / 2));
-					}
+					EntityFallingBlockTFC entityfallingblock = new EntityFallingBlockTFC(world, x + 0.5F, y + 0.5F, z + 0.5F, block, meta);
+					world.spawnEntityInWorld(entityfallingblock);
+					if (block instanceof BlockCobble)
+						world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (world.rand.nextFloat() / 2));
+					else
+						world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (world.rand.nextFloat() / 2));
 				}
-				else
+			}
+			else
+			{
+				world.setBlockToAir(x, y, z);
+
+				while (canFallBelow(world, x, y - 1, z) && y > 0)
 				{
-					world.setBlockToAir(x, y, z);
+					--y;
+				}
 
-					while (canFallBelow(world, x, y - 1, z) && y > 0)
-					{
-						--y;
-					}
-
-					if (y > 0)
-					{
-						world.setBlock(x, y, z, block, meta, 0x2);
-					}
+				if (y > 0)
+				{
+					world.setBlock(x, y, z, block, meta, 0x2);
 				}
 			}
 		}

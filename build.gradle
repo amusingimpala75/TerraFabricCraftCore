@@ -31,7 +31,7 @@ allprojects {
     apply plugin: 'maven'
     group = config.group_name
     version = config.mod_version
-	archivesBaseName = "[${config.minecraft_version}]${config.mod_id}"
+	archivesBaseName = "${config.minecraft_version}-${config.mod_id}"
 
     minecraft {
     version = config.minecraft_version + "-" + config.forge_version

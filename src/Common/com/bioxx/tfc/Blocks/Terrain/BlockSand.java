@@ -1,6 +1,5 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -32,6 +31,13 @@ public class BlockSand extends BlockTerra
 		super(Material.sand);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		textureOffset = texOff;
+	}
+
+	@Override
+	public int tickRate(World p_149738_1_)
+	{
+//		return super.tickRate(p_149738_1_);
+		return 20;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -100,78 +106,7 @@ public class BlockSand extends BlockTerra
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
-		if (!world.isRemote && world.doChunksNearChunkExist(x, y, z, 1))
-		{
-			int meta = world.getBlockMetadata(x, y, z);
-
-			boolean canFallOneBelow = BlockCollapsible.canFallBelow(world, x, y - 1, z);
-			byte count = 0;
-			List<Integer> sides = new ArrayList<Integer>();
-
-			if (world.isAirBlock(x + 1, y, z))
-			{
-				count++;
-				if (BlockCollapsible.canFallBelow(world, x + 1, y - 1, z))
-					sides.add(0);
-			}
-			if (world.isAirBlock(x, y, z + 1))
-			{
-				count++;
-				if (BlockCollapsible.canFallBelow(world, x, y - 1, z + 1))
-					sides.add(1);
-			}
-			if (world.isAirBlock(x - 1, y, z))
-			{
-				count++;
-				if (BlockCollapsible.canFallBelow(world, x - 1, y - 1, z))
-					sides.add(2);
-			}
-			if (world.isAirBlock(x, y, z - 1))
-			{
-				count++;
-				if (BlockCollapsible.canFallBelow(world, x, y - 1, z - 1))
-					sides.add(3);
-			}
-
-			if (!canFallOneBelow && count > 2 && !sides.isEmpty())
-			{
-				switch (sides.get(random.nextInt(sides.size())))
-				{
-				case 0:
-				{
-					world.setBlockToAir(x, y, z);
-					world.setBlock(x + 1, y, z, this, meta, 0x2);
-					BlockCollapsible.tryToFall(world, x + 1, y, z, this);
-					break;
-				}
-				case 1:
-				{
-					world.setBlockToAir(x, y, z);
-					world.setBlock(x, y, z + 1, this, meta, 0x2);
-					BlockCollapsible.tryToFall(world, x, y, z + 1, this);
-					break;
-				}
-				case 2:
-				{
-					world.setBlockToAir(x, y, z);
-					world.setBlock(x - 1, y, z, this, meta, 0x2);
-					BlockCollapsible.tryToFall(world, x - 1, y, z, this);
-					break;
-				}
-				case 3:
-				{
-					world.setBlockToAir(x, y, z);
-					world.setBlock(x, y, z - 1, this, meta, 0x2);
-					BlockCollapsible.tryToFall(world, x, y, z - 1, this);
-					break;
-				}
-				}
-			}
-			else if (canFallOneBelow)
-			{
-				BlockCollapsible.tryToFall(world, x, y, z, this);
-			}
-		}
+        BlockCollapsible.updateTickCollapsible(world, x, y, z, random, this, false);
 	}
 
 	@Override
