@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "terrafabriccraft-core",
+  "version": "${version}",
+
+  "name": "TerraFabricCraft Core",
+  "description": "Survival Mode as it should have been. Rebuilt from the gournd up for Modern Fabric",
+  "authors": [
+    "Bioxx", 
+    "Dunkleosteus", 
+    "Kittychanley",
+    "AmusingImpala75 (Port)"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "GPL",
+  "icon": "assets/terrafabriccraft-core/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.amusingimpala75.terrafabriccraftcore.TerraFabricCraftCore"
+    ]
+  },
+  "mixins": [
+    "terrafabriccraft-core.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  }
+}

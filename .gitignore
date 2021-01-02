@@ -1,83 +1,33 @@
-# Created by https://www.gitignore.io
-# Following settings: Gradle, intellij, eclipse
-### Gradle ###
-.gradle
+# gradle
+
+.gradle/
 build/
+out/
+classes/
 
-# Ignore Gradle GUI config
-gradle-app.setting
+# eclipse
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+*.launch
 
+# idea
 
-### Intellij ###
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
-
-*.iml
-
-## Directory-based project format:
 .idea/
-
-## File-based project format:
+*.iml
 *.ipr
 *.iws
 
-## Plugin-specific files:
+# vscode
 
-# IntelliJ
-/out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-
-
-### Eclipse ###
-*.pydevproject
-.metadata
-.gradle
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
 .settings/
-.loadpath
-
-# Eclipse Core
+.vscode/
+bin/
+.classpath
 .project
 
-# External tool builders
-.externalToolBuilders/
+# macos
 
-# Locally stored "Eclipse launch configurations"
-*.launch
+*.DS_Store
 
-# CDT-specific
-.cproject
+# fabric
 
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
-
-# PDT-specific
-.buildpath
-
-# sbteclipse plugin
-.target
-
-# TeXlipse plugin
-.texlipse
-
-# Other
-*Thumbs.db
-.pmd
+run/
