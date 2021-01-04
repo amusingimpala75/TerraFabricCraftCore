@@ -3,7 +3,7 @@ Terra~~Firma~~FabricCraft
 A Fabric Port of the TerraFirmaCraft mod, from the 1.7.10 version
 ---
 
-##Questions
+## Questions
 
 Q: Why forked from the 1.7.10 version? Why not a newer one?
 A: I know (and trust) the GPL more than the EUPL (In fact I had never heard of it before).
