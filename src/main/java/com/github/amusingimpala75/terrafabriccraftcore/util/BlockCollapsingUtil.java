@@ -1,6 +1,8 @@
 package com.github.amusingimpala75.terrafabriccraftcore.util;
 
 import com.github.amusingimpala75.terrafabriccraftcore.duck.BlockDuck;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.OreBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -34,8 +36,12 @@ public class BlockCollapsingUtil {
                             int done = 0;
                             while (done < height) {
                                 done++;
-                                if (((BlockDuck)(world.getBlockState(new BlockPos(i+x, j+y, k+z)).getBlock())).doesCollapse() && world.random.nextInt(100) < 55) {
-                                    ((BlockDuck)((world.getBlockState(new BlockPos(i+x, j+y, k+z))).getBlock())).tryToCollapse(world, new BlockPos(i+x, j+y+done, k+z), 1);
+                                int chance = world.random.nextInt(100);
+                                BlockPos posAt = new BlockPos(i + x, j + y, k + z);
+                                if (((BlockDuck) (world.getBlockState(posAt).getBlock())).doesCollapse() && chance < 55) {
+                                    ((BlockDuck) ((world.getBlockState(posAt)).getBlock())).tryToCollapse(world, new BlockPos(i + x, j + y + done, k + z), 1);
+                                } else if (chance < 55 && world.getBlockState(posAt).getBlock() instanceof OreBlock) {
+                                    world.setBlockState(posAt, Blocks.COBBLESTONE.getDefaultState());
                                 } else {
                                     done = height;
                                 }
