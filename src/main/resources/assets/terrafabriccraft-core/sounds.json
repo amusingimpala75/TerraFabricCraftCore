@@ -1,0 +1,224 @@
+{
+  "item.ceramic_break": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:ceramicbreak1"
+    ]
+  },
+
+  "item.fire_starter": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:firestarter1",
+      "terrafabriccraft-core:firestarter2",
+      "terrafabriccraft-core:firestarter3",
+      "terrafabriccraft-core:firestarter4",
+      "terrafabriccraft-core:firestarter5",
+      "terrafabriccraft-core:firestarter6",
+      "terrafabriccraft-core:firestarter7",
+      "terrafabriccraft-core:firestarter8",
+      "terrafabriccraft-core:firestarter9",
+      "terrafabriccraft-core:firestarter10"
+    ]
+  },
+  
+  "item.jug.blow": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:jugblow1"
+    ]
+  },
+
+  "mob.rooster.cry": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:rooster1"
+    ]
+  },
+
+  "quern.stone_drag": {
+    "category": "block",
+    "sounds": [
+      "terrafabriccraft-core:stonedrag1",
+      "terrafabriccraft-core:stonedrag2"
+    ]
+  },
+
+  "bellows.blow.air": {
+    "category": "block",
+    "sounds": [
+      "terrafabriccraft-core:bellows1"
+    ]
+  },
+
+  "dirt.slide.short": {
+    "category": "block",
+    "sounds": [
+      "terrafabriccraft-core:fdirt-s1",
+      "terrafabriccraft-core:fdirt-s2"
+    ]
+  },
+
+  "rock.slide.long": {
+    "category": "block",
+    "sounds": [
+      "terrafabriccraft-core:frock-l1",
+      "terrafabriccraft-core:frock-l2"
+    ]
+  },
+
+  "rock.slide.short": {
+    "category": "block",
+    "sounds": [
+      "terrafabriccraft-core:frock-s1",
+      "terrafabriccraft-core:frock-s2"
+    ]
+  },
+
+  "anvil.metal_impact": {
+    "category": "block",
+    "sounds": [
+      "terrafabriccraft-core:metalimpact1",
+      "terrafabriccraft-core:metalimpact2",
+      "terrafabriccraft-core:metalimpact3",
+      "terrafabriccraft-core:metalimpact4"
+    ]
+  },
+
+  "mob.deer.say": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:deer1",
+      "terrafabriccraft-core:deer2",
+      "terrafabriccraft-core:deer3",
+      "terrafabriccraft-core:deer4",
+      "terrafabriccraft-core:deer5",
+      "terrafabriccraft-core:deer6",
+	  "terrafabriccraft-core:deer7"
+    ]
+  },
+
+  "mob.deer.cry": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:deercry1",
+      "terrafabriccraft-core:deercry2",
+      "terrafabriccraft-core:deercry3",
+      "terrafabriccraft-core:deercry4"
+    ]
+  },
+
+  "mob.deer.hurt": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:deerhurt1"
+    ]
+  },
+
+  "mob.deer.death": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:deerdeath1"
+    ]
+  },
+
+  "mob.bear.say": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:bear1",
+      "terrafabriccraft-core:bear2",
+      "terrafabriccraft-core:bear3",
+      "terrafabriccraft-core:bear4",
+      "terrafabriccraft-core:bear5",
+      "terrafabriccraft-core:bear6"
+    ]
+  },
+
+  "mob.bear.cry": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:bearcry1",
+      "terrafabriccraft-core:bearcry2",
+      "terrafabriccraft-core:bearcry3",
+      "terrafabriccraft-core:bearcry4"
+    ]
+  },
+
+  "mob.bear.cub.cry": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:bearcubcry1"
+    ]
+  },
+
+  "mob.bear.hurt": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:bearhurt1"
+    ]
+  },
+
+    "mob.bear.death": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:beardeath1"
+    ]
+  },
+
+  "mob.pheasant.say": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:pheasant1",
+      "terrafabriccraft-core:pheasant2"
+    ]
+  },
+
+  "mob.pheasant.chick.say": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:pheasantchick1"
+    ]
+  },
+
+  "mob.pheasant.hurt": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:pheasanthurt1"
+    ]
+  },
+
+  "mob.pheasant.death": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:pheasantdeath1"
+    ]
+  },
+
+  "mob.cricket": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:cricket1",
+      "terrafabriccraft-core:cricket2",
+      "terrafabriccraft-core:cricket3",
+      "terrafabriccraft-core:cricket4"
+    ]
+  },
+
+  "mob.frog": {
+    "category": "ambient",
+    "sounds": [
+      "terrafabriccraft-core:frog1"
+    ]
+  },
+
+  "music.tfc": {
+    "category": "music",
+    "sounds": [
+      {"name": "terrafabriccraft-core:music/m0", "stream": true},
+      {"name": "terrafabriccraft-core:music/m1", "stream": true},
+      {"name": "terrafabriccraft-core:music/m2", "stream": true},
+      {"name": "terrafabriccraft-core:music/m3", "stream": true},
+      {"name": "terrafabriccraft-core:music/m4", "stream": true}
+    ]
+  }
+}
