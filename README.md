@@ -1,16 +1,13 @@
 Terra~~Firma~~FabricCraft
 =======
 A Fabric Port of the TerraFirmaCraft mod, from the 1.7.10 version
+Useful Code(ie. Gamecode) will be [here: ](https://github.com/amusingimpala75/TerraFabricCraft), but textures and any code taken from the original game will remain in this repo.
 ---
 
 ## Questions
 
 Q: Why forked from the 1.7.10 version? Why not a newer one?
 A: I know (and trust) the GPL more than the EUPL (In fact I had never heard of it before).
-
-Q: Why is there not much code here?
-A: I plan to split the fabric version into multiple standalone mods which can also be configured to work together in a way like TFC. A list of the repos is below:
-- \<Nothing yet\>
 
 ## About
 
