@@ -121,7 +121,7 @@ public class BassModel extends EntityModel<Entity> {
 	}
 
 	public void setRotationAngle(ModelPart modelRenderer, float x, float y, float z) {
-		modelRenderer.VertexConsumer = x;
+		modelRenderer.pitch = x;
 		modelRenderer.yaw = y;
 		modelRenderer.roll = z;
 	}
