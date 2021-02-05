@@ -20,7 +20,7 @@ public class RenderTerraJavelin extends Render
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float)x, (float)y, (float)z);
 		GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 - 90.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9, 0.0F, 0.0F, 1.0F);
+		GL11.glRotatef(entity.prevPitch + (entity.rotationPitch - entity.prevPitch) * par9, 0.0F, 0.0F, 1.0F);
 		Tessellator tessellator = Tessellator.instance;
 		byte var11 = 0;
 		float f2 = 0.0F;

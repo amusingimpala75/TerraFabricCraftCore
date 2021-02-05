@@ -21,6 +21,24 @@ dependencies {
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
+
+	modApi("me.sargunvohra.mcmods:autoconfig1u:3.3.1") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	include "me.sargunvohra.mcmods:autoconfig1u:3.3.1"
+	modImplementation ("io.github.prospector:modmenu:1.14.13+build.19"){
+		exclude module: 'fabric-api'
+	}
+	modImplementation ("me.shedaniel.cloth:config-2:4.8.3"){
+		exclude module: 'fabric-api'
+	}
+	include ("me.shedaniel.cloth:config-2:4.8.3"){
+		exclude module: 'fabric-api'
+	}
+}
+
+loom {
+	accessWidener "src/main/resources/terrafabriccraft-core.accesswidener"
 }
 
 processResources {

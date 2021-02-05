@@ -3,7 +3,7 @@ package com.bioxx.tfc.Render.TESR;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
@@ -85,12 +85,12 @@ public class TESRHopper extends TESRBase
 	private class ModelPress extends ModelBase
 	{
 		private ModelBox pressModel;
-		private ModelRenderer renderer;
+		private ModelPart renderer;
 
 		public ModelPress()
 		{
-			renderer = new ModelRenderer(this);
-			//ModelRenderer renderer, int textureOffsetX, int textureOffsetY,float originX, float originY, float originZ, int width, int height, int depth,float scale
+			renderer = new ModelPart(this);
+			//ModelPart renderer, int textureOffsetX, int textureOffsetY,float originX, float originY, float originZ, int width, int height, int depth,float scale
 			pressModel = new ModelBox(renderer, 0, 0, 0.5F, 0, 0.5F, 15, 4, 7, 1);
 			renderer.cubeList.add(pressModel);
 		}
@@ -98,7 +98,7 @@ public class TESRHopper extends TESRBase
 		@Override
 		public void render(Entity entity, float x, float y, float z, float maxX, float maxY, float maxZ) 
 		{
-			renderer = new ModelRenderer(this);
+			renderer = new ModelPart(this);
 
 			pressModel = new ModelBox(renderer, 0, 0, 2F, 16, 2F, 12, 12, 12, 0f);
 			renderer.cubeList.add(pressModel);

@@ -1,6 +1,6 @@
 package com.bioxx.tfc.Render.Models;
 
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,20 +21,20 @@ public class ModelSkeletonTFC extends ModelZombie
 	public ModelSkeletonTFC(float par1)
 	{
 		super(par1, 0.0F, 64, 32);
-		this.bipedRightArm = new ModelRenderer(this, 40, 16);
-		this.bipedRightArm.addBox(-1.0F, -2.0F, -1.0F, 2, 12, 2, par1);
-		this.bipedRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
-		this.bipedLeftArm = new ModelRenderer(this, 40, 16);
+		this.bipedRightArm = new ModelPart(this, 40, 16);
+		this.bipedRightArm.addCuboid(-1.0F, -2.0F, -1.0F, 2, 12, 2, par1);
+		this.bipedRightArm.setPivot(-5.0F, 2.0F, 0.0F);
+		this.bipedLeftArm = new ModelPart(this, 40, 16);
 		this.bipedLeftArm.mirror = true;
-		this.bipedLeftArm.addBox(-1.0F, -2.0F, -1.0F, 2, 12, 2, par1);
-		this.bipedLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
-		this.bipedRightLeg = new ModelRenderer(this, 0, 16);
-		this.bipedRightLeg.addBox(-1.0F, 0.0F, -1.0F, 2, 12, 2, par1);
-		this.bipedRightLeg.setRotationPoint(-2.0F, 12.0F, 0.0F);
-		this.bipedLeftLeg = new ModelRenderer(this, 0, 16);
+		this.bipedLeftArm.addCuboid(-1.0F, -2.0F, -1.0F, 2, 12, 2, par1);
+		this.bipedLeftArm.setPivot(5.0F, 2.0F, 0.0F);
+		this.bipedRightLeg = new ModelPart(this, 0, 16);
+		this.bipedRightLeg.addCuboid(-1.0F, 0.0F, -1.0F, 2, 12, 2, par1);
+		this.bipedRightLeg.setPivot(-2.0F, 12.0F, 0.0F);
+		this.bipedLeftLeg = new ModelPart(this, 0, 16);
 		this.bipedLeftLeg.mirror = true;
-		this.bipedLeftLeg.addBox(-1.0F, 0.0F, -1.0F, 2, 12, 2, par1);
-		this.bipedLeftLeg.setRotationPoint(2.0F, 12.0F, 0.0F);
+		this.bipedLeftLeg.addCuboid(-1.0F, 0.0F, -1.0F, 2, 12, 2, par1);
+		this.bipedLeftLeg.setPivot(2.0F, 12.0F, 0.0F);
 	}
 
 	/**

@@ -54,7 +54,7 @@ public class Helper {
 	public static MovingObjectPosition getMovingObjectPositionFromPlayer(World world, EntityLivingBase entity, boolean scanFluids, int reach)
 	{
 		float var4 = 1.0F;
-		float var5 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * var4;
+		float var5 = entity.prevPitch + (entity.rotationPitch - entity.prevPitch) * var4;
 		float var6 = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * var4;
 		double var7 = entity.prevPosX + (entity.posX - entity.prevPosX) * var4;
 		double var9 = entity.prevPosY + (entity.posY - entity.prevPosY) * var4 + 1.62D - entity.yOffset;

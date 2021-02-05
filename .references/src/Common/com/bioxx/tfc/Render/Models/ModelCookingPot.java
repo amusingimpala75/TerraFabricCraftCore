@@ -4,9 +4,9 @@ import net.minecraft.client.model.ModelBase;
 
 public class ModelCookingPot extends ModelBase
 {
-	public ModelRendererTFC renderer;
+	public ModelPartTFC renderer;
 	public ModelCookingPot(){
-		renderer = new ModelRendererTFC(this,0,0);
+		renderer = new ModelPartTFC(this,0,0);
 		float x = 8;
 		float y = 8;
 		float z = 8;

@@ -249,8 +249,8 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 			if(w.rand.nextInt(Math.max(((int)((160)/(temp-4))),1)) < 2) //chirp intensity grows with higher temperature
 			{
 				float vol = 0.1f + (w.rand.nextFloat() * 0.20F); // keep the volume between 0 and 0.3
-				float pitch = (temp / 100) * 2 + 0.5F + vol; // the chirp frequency will change depending on the climate temperature
-				w.playSoundEffect(x, y, z, TFC_Sounds.CRICKET, vol, pitch);
+				float VertexConsumer = (temp / 100) * 2 + 0.5F + vol; // the chirp frequency will change depending on the climate temperature
+				w.playSoundEffect(x, y, z, TFC_Sounds.CRICKET, vol, VertexConsumer);
 			}
 
 			if(rand.nextInt(8)==0){

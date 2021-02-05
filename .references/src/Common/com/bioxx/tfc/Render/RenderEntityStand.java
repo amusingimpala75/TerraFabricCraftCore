@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Render;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -32,12 +32,12 @@ public class RenderEntityStand extends RenderBiped
 	//private static final ResourceLocation Texture = new ResourceLocation("textures/entity/zombie/zombie.png");
 	private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/mob/stand.png");
 
-	private ModelRenderer plume;
-	private ModelRenderer plume2;
-	private ModelRenderer hornR1;
-	private ModelRenderer hornL1;
-	private ModelRenderer hornR2;
-	private ModelRenderer hornL2;
+	private ModelPart plume;
+	private ModelPart plume2;
+	private ModelPart hornR1;
+	private ModelPart hornL1;
+	private ModelPart hornR2;
+	private ModelPart hornL2;
 
 	private RenderLargeItem standBlockRenderer = new RenderLargeItem();
 
@@ -48,34 +48,34 @@ public class RenderEntityStand extends RenderBiped
 		this.modelArmorChestplate = new ModelStand(1.0F);
 		this.modelArmor = new ModelStand(0.5F);
 		//Bronze
-		plume = new ModelRenderer(modelArmorChestplate,40,0);
-		plume2 = new ModelRenderer(modelArmorChestplate,40,0);
-		plume.addBox(-1,-6,-10,2,6,10,0.5f);
-		plume2.addBox(-1, -6, -10, 2, 6, 10);
-		plume.setRotationPoint(0, -8, 2);
-		plume2.setRotationPoint(0,-2,4);
-		plume2.rotateAngleX = (float)(Math.PI/-3f);
+		plume = new ModelPart(modelArmorChestplate,40,0);
+		plume2 = new ModelPart(modelArmorChestplate,40,0);
+		plume.addCuboid(-1,-6,-10,2,6,10,0.5f);
+		plume2.addCuboid(-1, -6, -10, 2, 6, 10);
+		plume.setPivot(0, -8, 2);
+		plume2.setPivot(0,-2,4);
+		plume2.pivotX = (float)(Math.PI/-3f);
 		//Iron
-		hornR1 = new ModelRenderer(modelArmorChestplate,40,0);
-		hornR1.addBox(-6,-1.5f,-1.5f,3,3,6);
-		hornL1 = new ModelRenderer(modelArmorChestplate,40,0);
-		hornL1.addBox(6,-1.5f,-1.5f,3,3,6);       
-		hornR1.setRotationPoint(-6, -6, 5);
-		hornL1.setRotationPoint(6, -6, 8);
-		hornR1.rotateAngleY=(float)(Math.PI/-2);
-		hornR1.rotateAngleX = (float)Math.PI*(-1f/12f);
-		hornL1.rotateAngleY=(float)(Math.PI/2);
-		hornL1.rotateAngleX = (float)Math.PI*(-1f/12f);
-		hornR2 = new ModelRenderer(modelArmorChestplate,40,9);
-		hornR2.addBox(0, 0, -5f, 2, 2, 5);
-		hornR2.setRotationPoint(-6, 0f, 2f);
-		hornR2.rotateAngleX = (float)Math.PI*(6f/12f);
-		hornR2.rotateAngleZ = (float)Math.PI*(1f/6f);
-		hornL2 = new ModelRenderer(modelArmorChestplate,40,9);
-		hornL2.addBox(0, 0, -5f, 2, 2, 5);
-		hornL2.setRotationPoint(7, 0f, 2f);
-		hornL2.rotateAngleX = (float)Math.PI*(6f/12f);
-		hornL2.rotateAngleZ = (float)Math.PI*(-1f/6f);
+		hornR1 = new ModelPart(modelArmorChestplate,40,0);
+		hornR1.addCuboid(-6,-1.5f,-1.5f,3,3,6);
+		hornL1 = new ModelPart(modelArmorChestplate,40,0);
+		hornL1.addCuboid(6,-1.5f,-1.5f,3,3,6);
+		hornR1.setPivot(-6, -6, 5);
+		hornL1.setPivot(6, -6, 8);
+		hornR1.pivotY=(float)(Math.PI/-2);
+		hornR1.pivotX = (float)Math.PI*(-1f/12f);
+		hornL1.pivotY=(float)(Math.PI/2);
+		hornL1.pivotX = (float)Math.PI*(-1f/12f);
+		hornR2 = new ModelPart(modelArmorChestplate,40,9);
+		hornR2.addCuboid(0, 0, -5f, 2, 2, 5);
+		hornR2.setPivot(-6, 0f, 2f);
+		hornR2.pivotX = (float)Math.PI*(6f/12f);
+		hornR2.pivotZ = (float)Math.PI*(1f/6f);
+		hornL2 = new ModelPart(modelArmorChestplate,40,9);
+		hornL2.addCuboid(0, 0, -5f, 2, 2, 5);
+		hornL2.setPivot(7, 0f, 2f);
+		hornL2.pivotX = (float)Math.PI*(6f/12f);
+		hornL2.pivotZ = (float)Math.PI*(-1f/6f);
 
 		modelArmorChestplate.bipedHead.addChild(plume);
 		modelArmorChestplate.bipedHead.addChild(plume2);

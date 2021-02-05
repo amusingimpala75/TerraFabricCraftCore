@@ -202,7 +202,7 @@ public class EntityStand extends EntityLiving
 		}
 		else
 		{
-			f1 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * mult;
+			f1 = entity.prevPitch + (entity.rotationPitch - entity.prevPitch) * mult;
 			f2 = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * mult;
 			f3 = MathHelper.cos(-f2 * 0.017453292F - (float)Math.PI);
 			f4 = MathHelper.sin(-f2 * 0.017453292F - (float)Math.PI);

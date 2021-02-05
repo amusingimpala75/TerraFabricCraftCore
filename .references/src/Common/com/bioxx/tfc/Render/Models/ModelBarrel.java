@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Render.Models;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.AxisAlignedBB;
 
@@ -14,58 +14,58 @@ import org.lwjgl.opengl.GL11;
 public class ModelBarrel extends ModelBase
 {
 	/** The chest lid in the chest's model. */
-	//public ModelRenderer chestLid = (new ModelRenderer(this, 0, 0)).setTextureSize(64, 64);
+	//public ModelPart chestLid = (new ModelPart(this, 0, 0)).setTextureSize(64, 64);
 
-	public ModelRenderer barrel;
-	public ModelRenderer barrel2;
-	public ModelRenderer barrel3;
+	public ModelPart barrel;
+	public ModelPart barrel2;
+	public ModelPart barrel3;
 
 	//double d1;
 	//double d2;
 	//double d3;
 	/** The model of the bottom of the chest. */
-	public ModelRenderer chestBelow;
+	public ModelPart chestBelow;
 
 	/** The chest's knob in the chest model. */
-	public ModelRenderer chestKnob;
+	public ModelPart chestKnob;
 
 	public ModelBarrel(int type)
 	{
 
-		this.barrel = new ModelRenderer(this,0+(type*56),0).setTextureSize(952,76);
-		this.barrel2 = new ModelRenderer(this,0+(type*56),44).setTextureSize(952,76);
-		this.barrel3 = new ModelRenderer(this,0+(type*56),44).setTextureSize(952,76);
+		this.barrel = new ModelPart(this,0+(type*56),0).setTextureSize(952,76);
+		this.barrel2 = new ModelPart(this,0+(type*56),44).setTextureSize(952,76);
+		this.barrel3 = new ModelPart(this,0+(type*56),44).setTextureSize(952,76);
 
-		this.barrel.setRotationPoint(16,16,0);
-		this.barrel2.setRotationPoint(0,0,0);
-		this.barrel3.setRotationPoint(0,0,0);
+		this.barrel.setPivot(16,16,0);
+		this.barrel2.setPivot(0,0,0);
+		this.barrel3.setPivot(0,0,0);
 		//drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(d1,d2,d3,d1+1+x,d2+1+y,d3+1+z));
 		//TerraFirmaCraft.log.info("COORDS: "+d1+", "+d2+", "+d3);
-		this.barrel.addBox(1F,0f,1f, 14, 16, 14,0f);
-		barrel.rotateAngleZ =-(float)Math.PI;
-		this.barrel2.addBox(2, 0f, 2, 12, 16, 0,0f);
-		this.barrel2.addBox(2, 0f, 2, 0, 16, 12,0f);
-		this.barrel2.addBox(2, 0f, 14, 12, 16, 0,0f);
-		this.barrel2.addBox(14, 0f, 2, 0, 16, 12,0f);
-		this.barrel3.addBox(2, 2,2, 12, 12, 12,0f);
+		this.barrel.addCuboid(1F,0f,1f, 14, 16, 14,0f);
+		barrel.pivotZ =-(float)Math.PI;
+		this.barrel2.addCuboid(2, 0f, 2, 12, 16, 0,0f);
+		this.barrel2.addCuboid(2, 0f, 2, 0, 16, 12,0f);
+		this.barrel2.addCuboid(2, 0f, 14, 12, 16, 0,0f);
+		this.barrel2.addCuboid(14, 0f, 2, 0, 16, 12,0f);
+		this.barrel3.addCuboid(2, 2,2, 12, 12, 12,0f);
 
 
 	}
 	/*
-        this.chestLid.addBox(0.0F, -5.0F, -14.0F, 14, 5, 14, 0.0F);
+        this.chestLid.addCuboid(0.0F, -5.0F, -14.0F, 14, 5, 14, 0.0F);
         this.chestLid.rotationPointX = 1.0F;
-        this.chestLid.rotationPointY = 7.0F;
-        this.chestLid.rotationPointZ = 15.0F;
-        this.chestKnob = (new ModelRenderer(this, 0, 0)).setTextureSize(64, 64);
-        this.chestKnob.addBox(-1.0F, -2.0F, -15.0F, 2, 4, 1, 0.0F);
+        this.chestLid.pivotY = 7.0F;
+        this.chestLid.pivotZ = 15.0F;
+        this.chestKnob = (new ModelPart(this, 0, 0)).setTextureSize(64, 64);
+        this.chestKnob.addCuboid(-1.0F, -2.0F, -15.0F, 2, 4, 1, 0.0F);
         this.chestKnob.rotationPointX = 8.0F;
-        this.chestKnob.rotationPointY = 7.0F;
-        this.chestKnob.rotationPointZ = 15.0F;
-        this.chestBelow = (new ModelRenderer(this, 0, 19)).setTextureSize(64, 64);
-        this.chestBelow.addBox(0.0F, 0.0F, 0.0F, 14, 10, 14, 0.0F);
+        this.chestKnob.pivotY = 7.0F;
+        this.chestKnob.pivotZ = 15.0F;
+        this.chestBelow = (new ModelPart(this, 0, 19)).setTextureSize(64, 64);
+        this.chestBelow.addCuboid(0.0F, 0.0F, 0.0F, 14, 10, 14, 0.0F);
         this.chestBelow.rotationPointX = 1.0F;
-        this.chestBelow.rotationPointY = 6.0F;
-        this.chestBelow.rotationPointZ = 1.0F;*/
+        this.chestBelow.pivotY = 6.0F;
+        this.chestBelow.pivotZ = 1.0F;*/
 
 
 	public void drawBox(AxisAlignedBB par1AxisAlignedBB)

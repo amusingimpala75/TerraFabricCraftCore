@@ -175,7 +175,7 @@ public class EntityFishHookTFC extends EntityFishHook
 		this.motionZ = par5;
 		float f3 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
 		this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(par1, par5) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(par3, f3) * 180.0D / Math.PI);
+		this.prevPitch = this.rotationPitch = (float)(Math.atan2(par3, f3) * 180.0D / Math.PI);
 		this.ticksInGround = 0;
 	}
 
@@ -184,7 +184,7 @@ public class EntityFishHookTFC extends EntityFishHook
 
 	/**
 	 * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
-	 * posY, posZ, yaw, pitch
+	 * posY, posZ, yaw, VertexConsumer
 	 */
 	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9)
 	{
@@ -352,11 +352,11 @@ public class EntityFishHookTFC extends EntityFishHook
 				float f1 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 				this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-				for (this.rotationPitch = (float)(Math.atan2(this.motionY, f1) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+				for (this.rotationPitch = (float)(Math.atan2(this.motionY, f1) * 180.0D / Math.PI); this.rotationPitch - this.prevPitch < -180.0F; this.prevPitch -= 360.0F)
 					;
 
-				while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
-					this.prevRotationPitch += 360.0F;
+				while (this.rotationPitch - this.prevPitch >= 180.0F)
+					this.prevPitch += 360.0F;
 
 				while (this.rotationYaw - this.prevRotationYaw < -180.0F)
 					this.prevRotationYaw -= 360.0F;
@@ -364,7 +364,7 @@ public class EntityFishHookTFC extends EntityFishHook
 				while (this.rotationYaw - this.prevRotationYaw >= 180.0F)
 					this.prevRotationYaw += 360.0F;
 
-				this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
+				this.rotationPitch = this.prevPitch + (this.rotationPitch - this.prevPitch) * 0.2F;
 				this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
 				float f2 = 0.92F;
 

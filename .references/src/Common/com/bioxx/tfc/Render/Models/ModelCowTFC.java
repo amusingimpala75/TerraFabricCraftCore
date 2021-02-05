@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Render.Models;
 
 import net.minecraft.client.model.ModelQuadruped;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
@@ -12,59 +12,59 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 public class ModelCowTFC extends ModelQuadruped
 {
-	public ModelRenderer udders;
-	private ModelRenderer horn1;
-	private ModelRenderer horn2;
-	private ModelRenderer horn1b;
-	private ModelRenderer horn2b;
+	public ModelPart udders;
+	private ModelPart horn1;
+	private ModelPart horn2;
+	private ModelPart horn1b;
+	private ModelPart horn2b;
 	public ModelCowTFC()
 	{
 		super(12, 0.0F);
-		this.head = new ModelRenderer(this, 0, 0);
-		this.head.addBox(-4.0F, -4.0F, -6.0F, 8, 8, 6, 0.0F);
-		this.head.setRotationPoint(0.0F, 4.0F, -8.0F);
+		this.head = new ModelPart(this, 0, 0);
+		this.head.addCuboid(-4.0F, -4.0F, -6.0F, 8, 8, 6, 0.0F);
+		this.head.setPivot(0.0F, 4.0F, -8.0F);
 
-		horn1 = new ModelRenderer(this,22,0);
-		horn1.addBox(0F, 0F, 0F, 1, 3, 1, 0.15F);
-		horn1.setRotationPoint(-5.5F, -2.5F, -2F);
-		horn1.rotateAngleZ = (float)-Math.PI/2;
+		horn1 = new ModelPart(this,22,0);
+		horn1.addCuboid(0F, 0F, 0F, 1, 3, 1, 0.15F);
+		horn1.setPivot(-5.5F, -2.5F, -2F);
+		horn1.pivotZ = (float)-Math.PI/2;
 
-		horn1b = new ModelRenderer(this,22,0);
-		horn1b.addBox(0,-2.1f,-0.5f,1,3,1,0F);
-		horn1b.setRotationPoint(0f, 0f, 0f);
-		horn1b.rotateAngleX = (float)Math.PI/3f;
-		horn1b.rotateAngleY = (float)-Math.PI/12f;
+		horn1b = new ModelPart(this,22,0);
+		horn1b.addCuboid(0,-2.1f,-0.5f,1,3,1,0F);
+		horn1b.setPivot(0f, 0f, 0f);
+		horn1b.pivotX = (float)Math.PI/3f;
+		horn1b.pivotY = (float)-Math.PI/12f;
 		horn1.addChild(horn1b);
 
 		this.head.addChild(horn1);
-		horn2 = new ModelRenderer(this,22,0);
-		horn2.addBox(0F, -3F, 0F, 1, 3, 1, 0.15F);
-		horn2.setRotationPoint(5.5F, -2.5F, -2F);
-		horn2.rotateAngleZ = (float)-Math.PI/2;
+		horn2 = new ModelPart(this,22,0);
+		horn2.addCuboid(0F, -3F, 0F, 1, 3, 1, 0.15F);
+		horn2.setPivot(5.5F, -2.5F, -2F);
+		horn2.pivotZ = (float)-Math.PI/2;
 
-		horn2b = new ModelRenderer(this,22,0);
-		horn2b.addBox(0f, -0.8F, -0.5f, 1, 3, 1,0F);
-		horn2b.setRotationPoint(0F, 0F, 0F);
-		horn2b.rotateAngleX = (float)-Math.PI/3F;
-		horn2b.rotateAngleY = (float)-Math.PI/12F;
+		horn2b = new ModelPart(this,22,0);
+		horn2b.addCuboid(0f, -0.8F, -0.5f, 1, 3, 1,0F);
+		horn2b.setPivot(0F, 0F, 0F);
+		horn2b.pivotX = (float)-Math.PI/3F;
+		horn2b.pivotY = (float)-Math.PI/12F;
 		horn2.addChild(horn2b);
 
 		this.head.addChild(horn2);
-		this.body = new ModelRenderer(this, 18, 4);
-		this.body.addBox(-6.0F, -10.0F, -7.0F, 12, 18, 10, 0.0F);
-		this.body.setRotationPoint(0.0F, 5.0F, 2.0F);
-		this.udders = new ModelRenderer(this, 18,4);
-		this.udders.setRotationPoint(0.0F, 5.0F, 2.0F);
-		this.udders.setTextureOffset(52, 0).addBox(-2.0F, 2.0F, -8.0F, 4, 6, 1);
+		this.body = new ModelPart(this, 18, 4);
+		this.body.addCuboid(-6.0F, -10.0F, -7.0F, 12, 18, 10, 0.0F);
+		this.body.setPivot(0.0F, 5.0F, 2.0F);
+		this.udders = new ModelPart(this, 18,4);
+		this.udders.setPivot(0.0F, 5.0F, 2.0F);
+		this.udders.setTextureOffset(52, 0).addCuboid(-2.0F, 2.0F, -8.0F, 4, 6, 1);
 
 		--this.leg1.rotationPointX;
 		++this.leg2.rotationPointX;
-		this.leg1.rotationPointZ += 0.0F;
-		this.leg2.rotationPointZ += 0.0F;
+		this.leg1.pivotZ += 0.0F;
+		this.leg2.pivotZ += 0.0F;
 		--this.leg3.rotationPointX;
 		++this.leg4.rotationPointX;
-		--this.leg3.rotationPointZ;
-		--this.leg4.rotationPointZ;
+		--this.leg3.pivotZ;
+		--this.leg4.pivotZ;
 		this.field_78151_h += 2.0F;
 	}
 
@@ -85,8 +85,8 @@ public class ModelCowTFC extends ModelQuadruped
 		GL11.glTranslatef (0.0F, 0,0.1875f-(0.1875f*percent));
 		if(percent < 0.5)
 		{
-			horn1.isHidden = true;//rotateAngleX = (float)Math.PI;
-			horn2.isHidden = true;//rotateAngleX = -(float)Math.PI;
+			horn1.isHidden = true;//pivotX = (float)Math.PI;
+			horn2.isHidden = true;//pivotX = -(float)Math.PI;
 			if(percent < 0.75)
 			{
 				horn1b.isHidden = true;
@@ -123,16 +123,16 @@ public class ModelCowTFC extends ModelQuadruped
 	 */
 	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6)
 	{
-		this.head.rotateAngleX = par5 / (180F / (float)Math.PI);
-		this.head.rotateAngleY = par4 / (180F / (float)Math.PI);
-		this.body.rotateAngleX = (float) Math.PI / 2F;
-		this.udders.rotateAngleX = (float) Math.PI / 2F;
-		this.leg1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-		this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
-		this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
-		this.leg4.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-		horn1.rotateAngleX = 0F;
-		horn2.rotateAngleX = 0F;
+		this.head.pivotX = par5 / (180F / (float)Math.PI);
+		this.head.pivotY = par4 / (180F / (float)Math.PI);
+		this.body.pivotX = (float) Math.PI / 2F;
+		this.udders.pivotX = (float) Math.PI / 2F;
+		this.leg1.pivotX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+		this.leg2.pivotX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
+		this.leg3.pivotX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
+		this.leg4.pivotX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+		horn1.pivotX = 0F;
+		horn2.pivotX = 0F;
 		horn1.isHidden = false;
 		horn1b.isHidden = false;
 		horn2.isHidden = false;

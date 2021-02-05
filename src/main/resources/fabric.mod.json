@@ -16,6 +16,8 @@
     "sources": ""
   },
 
+  "accessWidener" : "terrafabriccraft-core.accesswidener",
+
   "license": "GPL",
   "icon": "assets/terrafabriccraft-core/icon.png",
 
@@ -23,7 +25,8 @@
   "entrypoints": {
     "main": [
       "com.github.amusingimpala75.terrafabriccraftcore.TerraFabricCraftCore"
-    ]
+    ],
+    "client": ["com.github.amusingimpala75.terrafabriccraftcore.client.TerraFabricCraftCoreClient"]
   },
   "mixins": [
     "terrafabriccraft-core.mixins.json"

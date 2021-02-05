@@ -4,9 +4,14 @@
   "package": "com.github.amusingimpala75.terrafabriccraftcore.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "LevelPropertiesMixin",
+    "ModelCuboidAccessor",
+    "HorseTypeAccessor",
+    "MatrixStackAccessor",
+    "ModelPartTextureAccessor",
+    "AddDecayRendererMixin"
   ],
   "client": [
-
   ],
   "injectors": {
     "defaultRequire": 1

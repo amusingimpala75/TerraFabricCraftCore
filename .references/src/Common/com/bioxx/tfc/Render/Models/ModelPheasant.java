@@ -6,7 +6,7 @@
 package com.bioxx.tfc.Render.Models;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
@@ -18,114 +18,114 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 public class ModelPheasant extends ModelBase
 {
 	//fields
-	private ModelRenderer body;
-	private ModelRenderer tail;
-	private ModelRenderer leftLeg;
-	private ModelRenderer rightLeg;
-	private ModelRenderer tailFeather;
-	private ModelRenderer leftLowerLeg;
-	private ModelRenderer rightLowerLeg;
-	private ModelRenderer neck;
-	private ModelRenderer head;
-	private ModelRenderer beak;
-	private ModelRenderer chest;
-	private ModelRenderer leftWing;
-	private ModelRenderer rightWing;
-	private ModelRenderer leftFoot;
-	private ModelRenderer rightFoot;
+	private ModelPart body;
+	private ModelPart tail;
+	private ModelPart leftLeg;
+	private ModelPart rightLeg;
+	private ModelPart tailFeather;
+	private ModelPart leftLowerLeg;
+	private ModelPart rightLowerLeg;
+	private ModelPart neck;
+	private ModelPart head;
+	private ModelPart beak;
+	private ModelPart chest;
+	private ModelPart leftWing;
+	private ModelPart rightWing;
+	private ModelPart leftFoot;
+	private ModelPart rightFoot;
 
 	public ModelPheasant()
 	{
 		textureWidth = 64;
 		textureHeight = 32;
 
-		body = new ModelRenderer(this, 0, 7);
-		body.addBox(-4F, 0F, -2.5F, 9, 6, 5);
-		body.setRotationPoint(0F, 12F, 0F);
+		body = new ModelPart(this, 0, 7);
+		body.addCuboid(-4F, 0F, -2.5F, 9, 6, 5);
+		body.setPivot(0F, 12F, 0F);
 		body.mirror = true;
 		setRotation(body, 0F, 0F, -0.5235988F);
 
-		tail = new ModelRenderer(this, 0, 0);
-		tail.addBox(-7F, 2F, -2F, 6, 3, 4);
-		tail.setRotationPoint(0F, 12F, 0F);
+		tail = new ModelPart(this, 0, 0);
+		tail.addCuboid(-7F, 2F, -2F, 6, 3, 4);
+		tail.setPivot(0F, 12F, 0F);
 		tail.mirror = true;
 		setRotation(tail, 0F, 0F, -0.1745329F);
 
-		leftLeg = new ModelRenderer(this, 16, 24);
-		leftLeg.addBox(1F, 4F, 1F, 3, 4, 2);
-		leftLeg.setRotationPoint(0F, 12F, 0F);
+		leftLeg = new ModelPart(this, 16, 24);
+		leftLeg.addCuboid(1F, 4F, 1F, 3, 4, 2);
+		leftLeg.setPivot(0F, 12F, 0F);
 		leftLeg.mirror = true;
 		setRotation(leftLeg, 0F, 0F, 0.3490659F);
 
-		rightLeg = new ModelRenderer(this, 26, 24);
-		rightLeg.addBox(1F, 4F, -3F, 3, 4, 2);
-		rightLeg.setRotationPoint(0F, 12F, 0F);
+		rightLeg = new ModelPart(this, 26, 24);
+		rightLeg.addCuboid(1F, 4F, -3F, 3, 4, 2);
+		rightLeg.setPivot(0F, 12F, 0F);
 		rightLeg.mirror = true;
 		setRotation(rightLeg, 0F, 0F, 0.3490659F);
 
-		tailFeather = new ModelRenderer(this, 20, 0);
-		tailFeather.addBox(-14.96F, 3F, -1F, 9, 1, 2);
-		tailFeather.setRotationPoint(0F, 12F, 0F);
+		tailFeather = new ModelPart(this, 20, 0);
+		tailFeather.addCuboid(-14.96F, 3F, -1F, 9, 1, 2);
+		tailFeather.setPivot(0F, 12F, 0F);
 		tailFeather.mirror = true;
 		setRotation(tailFeather, 0F, 0F, -0.0872665F);
 
-		leftLowerLeg = new ModelRenderer(this, 34, 19);
-		leftLowerLeg.addBox(-1F, 8F, 1.5F, 1, 4, 1);
-		leftLowerLeg.setRotationPoint(0F, 0F, 0F);
+		leftLowerLeg = new ModelPart(this, 34, 19);
+		leftLowerLeg.addCuboid(-1F, 8F, 1.5F, 1, 4, 1);
+		leftLowerLeg.setPivot(0F, 0F, 0F);
 		leftLowerLeg.mirror = true;
 		setRotation(leftLowerLeg, 0F, 0F, 0F);
 
-		rightLowerLeg = new ModelRenderer(this, 38, 19);
-		rightLowerLeg.addBox(-1F, 8F, -2.5F, 1, 4, 1);
-		rightLowerLeg.setRotationPoint(0F, 0F, 0F);
+		rightLowerLeg = new ModelPart(this, 38, 19);
+		rightLowerLeg.addCuboid(-1F, 8F, -2.5F, 1, 4, 1);
+		rightLowerLeg.setPivot(0F, 0F, 0F);
 		rightLowerLeg.mirror = true;
 		setRotation(rightLowerLeg, 0F, 0F, 0F);
 
-		neck = new ModelRenderer(this, 28, 13);
-		neck.addBox(4F, 2F, -1.5F, 4, 3, 3,0.05F);
-		neck.setRotationPoint(-4F, 2F, 0F);
+		neck = new ModelPart(this, 28, 13);
+		neck.addCuboid(4F, 2F, -1.5F, 4, 3, 3,0.05F);
+		neck.setPivot(-4F, 2F, 0F);
 		neck.mirror = true;
 		setRotation(neck, 0F, 0F, -0.8726646F);
 
-		head = new ModelRenderer(this, 16, 18);
-		head.addBox(2.5F, -3F, -1.5F, 3, 3, 3,0.1F);
-		head.setRotationPoint(4F, 10F, 0F);
+		head = new ModelPart(this, 16, 18);
+		head.addCuboid(2.5F, -3F, -1.5F, 3, 3, 3,0.1F);
+		head.setPivot(4F, 10F, 0F);
 		head.mirror = true;
 		setRotation(head, 0F, 0F, 0F);
 
-		beak = new ModelRenderer(this, 28, 19);
-		beak.addBox(5F, -2F, -0.5F, 2, 1, 1);
-		beak.setRotationPoint(4F, 10F, 0F);
+		beak = new ModelPart(this, 28, 19);
+		beak.addCuboid(5F, -2F, -0.5F, 2, 1, 1);
+		beak.setPivot(4F, 10F, 0F);
 		beak.mirror = true;
 		setRotation(beak, 0F, 0F, 0F);
 
-		chest = new ModelRenderer(this, 28, 7);
-		chest.addBox(-1F, 4.5F, -1.5F, 4, 3, 3);
-		chest.setRotationPoint(-4F, 2F, 0F);
+		chest = new ModelPart(this, 28, 7);
+		chest.addCuboid(-1F, 4.5F, -1.5F, 4, 3, 3);
+		chest.setPivot(-4F, 2F, 0F);
 		chest.mirror = true;
 		setRotation(chest, 0F, 0F, -1.396263F);
 
-		leftWing = new ModelRenderer(this, 0, 23);
-		leftWing.addBox(-3F, 1F, 2.5F, 7, 4, 1);
-		leftWing.setRotationPoint(0F, 12F, 0F);
+		leftWing = new ModelPart(this, 0, 23);
+		leftWing.addCuboid(-3F, 1F, 2.5F, 7, 4, 1);
+		leftWing.setPivot(0F, 12F, 0F);
 		leftWing.mirror = true;
 		setRotation(leftWing, 0F, 0F, -0.5235988F);
 
-		rightWing = new ModelRenderer(this, 0, 18);
-		rightWing.addBox(-3F, 1F, -3.5F, 7, 4, 1);
-		rightWing.setRotationPoint(0F, 12F, 0F);
+		rightWing = new ModelPart(this, 0, 18);
+		rightWing.addCuboid(-3F, 1F, -3.5F, 7, 4, 1);
+		rightWing.setPivot(0F, 12F, 0F);
 		rightWing.mirror = true;
 		setRotation(rightWing, 0F, 0F, -0.5235988F);
 
-		leftFoot = new ModelRenderer(this, 20, 3);
-		leftFoot.addBox(-2F, 11.9F, 0.5F, 4, 0, 3,0.001F);
-		leftFoot.setRotationPoint(0F, 0F, 0F);
+		leftFoot = new ModelPart(this, 20, 3);
+		leftFoot.addCuboid(-2F, 11.9F, 0.5F, 4, 0, 3,0.001F);
+		leftFoot.setPivot(0F, 0F, 0F);
 		leftFoot.mirror = true;
 		setRotation(leftFoot, 0F, 0F, 0F);
 
-		rightFoot = new ModelRenderer(this, 20, 3);
-		rightFoot.addBox(-2F, 11.9F, -3.5F, 4, 0, 3,0.001F);
-		rightFoot.setRotationPoint(0F, 0F, 0F);
+		rightFoot = new ModelPart(this, 20, 3);
+		rightFoot.addCuboid(-2F, 11.9F, -3.5F, 4, 0, 3,0.001F);
+		rightFoot.setPivot(0F, 0F, 0F);
 		rightFoot.mirror = true;
 		setRotation(rightFoot, 0F, 0F, 0F);
 		
@@ -175,30 +175,30 @@ public class ModelPheasant extends ModelBase
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
+	private void setRotation(ModelPart model, float x, float y, float z)
 	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
+		model.pivotX = x;
+		model.pivotY = y;
+		model.pivotZ = z;
 	}
 	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6)
 	{	
-		//this.Head.rotateAngleZ = -(par5 / (180F / (float)Math.PI));
-		this.head.rotateAngleY = par4 / (180F / (float)Math.PI);
-		//this.Beak.rotateAngleZ = this.Head.rotateAngleZ;
-		this.beak.rotateAngleY = this.head.rotateAngleY;
-		//this.Neck.rotateAngleY = this.Head.rotateAngleY;
-		//this.Chest.rotateAngleY = this.Head.rotateAngleY;
-		this.neck.rotateAngleZ = -(5*(float)(Math.PI / 18F));
-		this.chest.rotateAngleZ = -(8*(float)(Math.PI / 18F));
-		this.body.rotateAngleZ = -((float)(Math.PI / 6F));
-		this.rightWing.rotateAngleZ = -((float)(Math.PI / 6F));
-		this.leftWing.rotateAngleZ =  -((float)(Math.PI / 6F));
+		//this.Head.pivotZ = -(par5 / (180F / (float)Math.PI));
+		this.head.pivotY = par4 / (180F / (float)Math.PI);
+		//this.Beak.pivotZ = this.Head.pivotZ;
+		this.beak.pivotY = this.head.pivotY;
+		//this.Neck.pivotY = this.Head.pivotY;
+		//this.Chest.pivotY = this.Head.pivotY;
+		this.neck.pivotZ = -(5*(float)(Math.PI / 18F));
+		this.chest.pivotZ = -(8*(float)(Math.PI / 18F));
+		this.body.pivotZ = -((float)(Math.PI / 6F));
+		this.rightWing.pivotZ = -((float)(Math.PI / 6F));
+		this.leftWing.pivotZ =  -((float)(Math.PI / 6F));
 		if(par3!=0){
-			rightWing.setRotationPoint(4, 12, -2);
-			leftWing.setRotationPoint(4, 12, 2);
-			rightWing.rotateAngleZ =-(float)(Math.PI/2F);
-			leftWing.rotateAngleZ =-(float)(Math.PI/2F);
+			rightWing.setPivot(4, 12, -2);
+			leftWing.setPivot(4, 12, 2);
+			rightWing.pivotZ =-(float)(Math.PI/2F);
+			leftWing.pivotZ =-(float)(Math.PI/2F);
 			rightWing.offsetX = -3F/16F;
 			rightWing.offsetY = -3F/16F;
 			rightWing.offsetZ = -1.5F/16F;
@@ -207,8 +207,8 @@ public class ModelPheasant extends ModelBase
 			leftWing.offsetZ = 1.5F/16F;
 		}
 		else{
-			rightWing.setRotationPoint(0, 12, 0);
-			leftWing.setRotationPoint(0, 12, 0);
+			rightWing.setPivot(0, 12, 0);
+			leftWing.setPivot(0, 12, 0);
 			rightWing.offsetX = 0;
 			rightWing.offsetY = 0;
 			rightWing.offsetZ = 0;
@@ -216,18 +216,18 @@ public class ModelPheasant extends ModelBase
 			leftWing.offsetY = 0;
 			leftWing.offsetZ = 0;
 		}
-		this.rightWing.rotateAngleY = par3;
-		this.leftWing.rotateAngleY = -par3;
+		this.rightWing.pivotY = par3;
+		this.leftWing.pivotY = -par3;
 		
 		
-		this.tail.rotateAngleZ = -((float)(Math.PI / 18F));
-		this.tailFeather.rotateAngleZ = -((float)(Math.PI / 36F));
-		this.rightLeg.rotateAngleZ = ((float)(Math.PI / 9F))+ MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-		this.leftLeg.rotateAngleZ = ((float)(Math.PI / 9F)) + MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
-		this.rightLowerLeg.rotateAngleZ = -((float)(Math.PI / 9F));
-		this.leftLowerLeg.rotateAngleZ = -((float)(Math.PI / 9F));
-		this.rightFoot.rotateAngleZ = 0;
-		this.leftFoot.rotateAngleZ = 0;
+		this.tail.pivotZ = -((float)(Math.PI / 18F));
+		this.tailFeather.pivotZ = -((float)(Math.PI / 36F));
+		this.rightLeg.pivotZ = ((float)(Math.PI / 9F))+ MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+		this.leftLeg.pivotZ = ((float)(Math.PI / 9F)) + MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
+		this.rightLowerLeg.pivotZ = -((float)(Math.PI / 9F));
+		this.leftLowerLeg.pivotZ = -((float)(Math.PI / 9F));
+		this.rightFoot.pivotZ = 0;
+		this.leftFoot.pivotZ = 0;
 	}
 
 }

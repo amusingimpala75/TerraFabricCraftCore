@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Render.Models;
 
 import net.minecraft.client.model.ModelPig;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
@@ -18,25 +18,25 @@ public class ModelPigTFC extends ModelPig
 		this(0.0F);
 	}
 
-	private ModelRenderer tusk1;
-	private ModelRenderer tusk2;
-	private ModelRenderer snout;
+	private ModelPart tusk1;
+	private ModelPart tusk2;
+	private ModelPart snout;
 
 	public ModelPigTFC(float par1)
 	{
 		super(par1);
-		tusk1 = new ModelRenderer(this,32,0);
-		tusk1.addBox(0F, 0F, 0F, 1, 2, 1, 0F);
-		tusk1.setRotationPoint(-3f,0.5f,-9f);
-		tusk1.rotateAngleX = (float)Math.PI/12;
+		tusk1 = new ModelPart(this,32,0);
+		tusk1.addCuboid(0F, 0F, 0F, 1, 2, 1, 0F);
+		tusk1.setPivot(-3f,0.5f,-9f);
+		tusk1.pivotX = (float)Math.PI/12;
 
-		tusk2 = new ModelRenderer(this,32,0);
-		tusk2.addBox(0F, 0F, 0F, 1, 2, 1, 0F);
-		tusk2.setRotationPoint(2f,0.5f,-9f);
-		tusk2.rotateAngleX = (float)Math.PI/12;
+		tusk2 = new ModelPart(this,32,0);
+		tusk2.addCuboid(0F, 0F, 0F, 1, 2, 1, 0F);
+		tusk2.setPivot(2f,0.5f,-9f);
+		tusk2.pivotX = (float)Math.PI/12;
 
-		snout = new ModelRenderer(this,0,26);
-		snout.addBox(-2.0F, 0.0F, -10.0F, 4, 3, 3, par1);
+		snout = new ModelPart(this,0,26);
+		snout.addCuboid(-2.0F, 0.0F, -10.0F, 4, 3, 3, par1);
 		snout.addChild(tusk1);
 		snout.addChild(tusk2);
 		this.head.addChild(snout);
@@ -87,12 +87,12 @@ public class ModelPigTFC extends ModelPig
 		//super.setRotationAngles(par1, par2, par3, par4, par5, par6);
 		tusk1.isHidden = true;
 		tusk2.isHidden = true;
-		this.head.rotateAngleX = par5 / (180F / (float)Math.PI);
-		this.head.rotateAngleY = par4 / (180F / (float)Math.PI);
-		this.body.rotateAngleX = (float) Math.PI / 2F;
-		this.leg1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-		this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
-		this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
-		this.leg4.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+		this.head.pivotX = par5 / (180F / (float)Math.PI);
+		this.head.pivotY = par4 / (180F / (float)Math.PI);
+		this.body.pivotX = (float) Math.PI / 2F;
+		this.leg1.pivotX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+		this.leg2.pivotX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
+		this.leg3.pivotX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
+		this.leg4.pivotX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
 	}
 }

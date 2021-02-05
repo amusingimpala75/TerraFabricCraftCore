@@ -8,13 +8,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModelCrossedSquares extends ModelBase
 {
-	public ModelRendererTFC renderer;
+	public ModelPartTFC renderer;
 
 	public ModelCrossedSquares(int texOffx, int texOffy, int texWidth, int texHeight,int sqWidth,int sqHeight,int sqDepth)
 	{
-		this.renderer = new ModelRendererTFC(this,0,0);
-		this.renderer.textureHeight = texHeight;
-		this.renderer.textureWidth = texWidth;
+		this.renderer = new ModelPartTFC(this,0,0);
+		this.((ModelPartTextureAccessor) renderer).getTextureHeight() = texHeight;
+		this.((ModelPartTextureAccessor) renderer).getTextureWidth() = texWidth;
 		float x = 0;
 		float y = 0;
 		float z = 0;

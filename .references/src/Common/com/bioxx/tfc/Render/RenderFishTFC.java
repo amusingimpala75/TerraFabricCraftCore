@@ -42,8 +42,8 @@ public class RenderFishTFC extends RenderLiving
 		preRenderScale ((EntityFishTFC) par1EntityLiving, par2);
 		Block blockBelow = par1EntityLiving.worldObj.getBlock((int)par1EntityLiving.posX,(int)par1EntityLiving.posY-1,(int)par1EntityLiving.posZ);
 		
-		//float pitch = ((EntityFishTFC) par1EntityLiving).currentRenderPitch;
-		//GL11.glRotatef(pitch, 1, 0, 0);
+		//float VertexConsumer = ((EntityFishTFC) par1EntityLiving).currentRenderPitch;
+		//GL11.glRotatef(VertexConsumer, 1, 0, 0);
 		if (!par1EntityLiving.isInWater() && !TFC_Core.isWater(blockBelow))
 		{
 			GL11.glRotatef(((EntityFishTFC) par1EntityLiving).currentRenderRoll, 0.0F, 0.0F, 1.0F);

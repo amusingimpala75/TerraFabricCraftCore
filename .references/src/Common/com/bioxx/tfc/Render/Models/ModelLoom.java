@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Render.Models;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.PositionTextureVertex;
-import net.minecraft.client.model.TexturedQuad;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.ModelPart.Vertex;
+import net.minecraft.client.model.ModelPart.Quad;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 
@@ -14,19 +14,19 @@ import com.bioxx.tfc.TileEntities.TELoom;
 
 public class ModelLoom extends ModelBase {
 
-	private ModelRenderer loomPole1;
-	private ModelRenderer loomPole2;
-	//private ModelRenderer loomPoleBase;
+	private ModelPart loomPole1;
+	private ModelPart loomPole2;
+	//private ModelPart loomPoleBase;
 
-	private TexturedQuad[] initialString;
-	private TexturedQuad[] finalString;
+	private ModelPart.Quad[] initialString;
+	private ModelPart.Quad[] finalString;
 
-	private TexturedQuad clothRender;
+	private ModelPart.Quad clothRender;
 
-	private PositionTextureVertex vert0;
-	private PositionTextureVertex vert1;
-	private PositionTextureVertex vert2;
-	private PositionTextureVertex vert3;
+	private ModelPart.Vertex vert0;
+	private ModelPart.Vertex vert1;
+	private ModelPart.Vertex vert2;
+	private ModelPart.Vertex vert3;
 
 	//private float[] stringLength = new float[16];
 
@@ -46,13 +46,13 @@ public class ModelLoom extends ModelBase {
 
 	public ModelLoom(){
 		super();
-		loomPole2 = new ModelRenderer(this,38,0);
-		loomPole2.addBox(0f,0f,0f,14,1,1);
-		loomPole2.setRotationPoint(1F, 1.65F, 10F);
+		loomPole2 = new ModelPart(this,38,0);
+		loomPole2.addCuboid(0f,0f,0f,14,1,1);
+		loomPole2.setPivot(1F, 1.65F, 10F);
 
-		loomPole1 = new ModelRenderer(this,38,0);
-		loomPole1.addBox(0f,0f,0f,14,1,1);
-		loomPole1.setRotationPoint(1F, 4.85F, 10F);
+		loomPole1 = new ModelPart(this,38,0);
+		loomPole1.addCuboid(0f,0f,0f,14,1,1);
+		loomPole1.setPivot(1F, 4.85F, 10F);
 	}
 
 
@@ -63,10 +63,10 @@ public class ModelLoom extends ModelBase {
 	 * @param y The y angle
 	 * @param z The z angle
 	 */
-	protected void setRotationRadians(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
+	protected void setRotationRadians(ModelPart model, float x, float y, float z) {
+		model.pivotX = x;
+		model.pivotY = y;
+		model.pivotZ = z;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class ModelLoom extends ModelBase {
 	 * @param y The y angle
 	 * @param z The z angle
 	 */
-	protected void setRotationDegrees(ModelRenderer model, float x, float y, float z) {
+	protected void setRotationDegrees(ModelPart model, float x, float y, float z) {
 		this.setRotationRadians(model, (float) Math.toRadians(x), (float) Math.toRadians(y), (float) Math.toRadians(z));
 	}
 
@@ -84,8 +84,8 @@ public class ModelLoom extends ModelBase {
 		float renderOffsetPole2 = 9f;
 		float renderOffsetPole1 = 9f;
 		
-		initialString = new TexturedQuad[numMaxStrings];
-		finalString = new TexturedQuad[numMaxStrings];
+		initialString = new ModelPart.Quad[numMaxStrings];
+		finalString = new ModelPart.Quad[numMaxStrings];
 
 		float string1Z,string2Z;
 
@@ -128,8 +128,8 @@ public class ModelLoom extends ModelBase {
 			resetCloth(te);
 		}
 
-		loomPole2.setRotationPoint(1F, 1.65F, renderOffsetPole2);
-		loomPole1.setRotationPoint(1F, 4.85F, renderOffsetPole1);
+		loomPole2.setPivot(1F, 1.65F, renderOffsetPole2);
+		loomPole1.setPivot(1F, 4.85F, renderOffsetPole1);
 		
 		GL11.glPushMatrix();
 		GL11.glRotatef(te.rotation * -90F, 0, 1, 0);
@@ -159,130 +159,130 @@ public class ModelLoom extends ModelBase {
 			//pole2 strings
 
 			//initial
-			vert0 = new PositionTextureVertex(
+			vert0 = new ModelPart.Vertex(
 					stringStartX + (i*stringWidth),
 					pole2StringY,
 					stringStartZ,
 					0,0);
-			vert1 = new PositionTextureVertex(
+			vert1 = new ModelPart.Vertex(
 					stringStartX + stringWidth + (i*stringWidth),
 					pole2StringY,
 					stringStartZ,
 					0,8);
-			vert2 = new PositionTextureVertex(
+			vert2 = new ModelPart.Vertex(
 					stringStartX +(i*stringWidth),
 					pole2Height,
 					string2Z,
 					8,0);
-			vert3 = new PositionTextureVertex(
+			vert3 = new ModelPart.Vertex(
 					stringStartX + stringWidth + (i*stringWidth),
 					pole2Height,
 					string2Z,
 					8,8);
 
-			initialString[i] = new TexturedQuad(new PositionTextureVertex[] {vert2, vert3, vert1, vert0}, 
+			initialString[i] = new ModelPart.Quad(new ModelPart.Vertex[] {vert2, vert3, vert1, vert0},
 					0, 0, 1, (int)string2Length, 16, 16);
 
 			//final
-			vert0 = new PositionTextureVertex(
+			vert0 = new ModelPart.Vertex(
 					stringStartX + (i*stringWidth),
 					pole2Height,
 					string2Z,
 					0,0);
-			vert1 = new PositionTextureVertex(
+			vert1 = new ModelPart.Vertex(
 					stringStartX + stringWidth + (i*stringWidth),
 					pole2Height,
 					string2Z,
 					0,8);
-			vert2 = new PositionTextureVertex(
+			vert2 = new ModelPart.Vertex(
 					stringStartX +(i*stringWidth),
 					0,
 					stringStartZ,
 					8,0);
-			vert3 = new PositionTextureVertex(
+			vert3 = new ModelPart.Vertex(
 					stringStartX + stringWidth + (i*stringWidth),
 					0,
 					stringStartZ,
 					8,8);
 
-			finalString[i] = new TexturedQuad(new PositionTextureVertex[] {vert2, vert3, vert1, vert0}, 
+			finalString[i] = new ModelPart.Quad(new ModelPart.Vertex[] {vert2, vert3, vert1, vert0},
 					0, 0, 1, (int)string2FinalLength, 16, 16);
 
 
 
 			//pole1 strings
 			//initial
-			vert0 = new PositionTextureVertex(
+			vert0 = new ModelPart.Vertex(
 					stringStartX + ((i+1)*stringWidth),
 					pole1StringY,
 					stringStartZ,
 					0,0);
-			vert1 = new PositionTextureVertex(
+			vert1 = new ModelPart.Vertex(
 					stringStartX + stringWidth + ((i+1)*stringWidth),
 					pole1StringY,
 					stringStartZ,
 					0,8);
-			vert2 = new PositionTextureVertex(
+			vert2 = new ModelPart.Vertex(
 					stringStartX + ((i+1)*stringWidth),
 					pole1Height,
 					string1Z,
 					8,0);
-			vert3 = new PositionTextureVertex(
+			vert3 = new ModelPart.Vertex(
 					stringStartX + stringWidth + ((i+1)*stringWidth),
 					pole1Height,
 					string1Z,
 					8,8);
 			if(i+1 < numStrings){
-				initialString[i+1] = new TexturedQuad(new PositionTextureVertex[] {vert2, vert3, vert1, vert0}, 
+				initialString[i+1] = new ModelPart.Quad(new ModelPart.Vertex[] {vert2, vert3, vert1, vert0},
 						0, 0, 1, (int)string1Length, 16, 16);
 				//final
-				vert0 = new PositionTextureVertex(
+				vert0 = new ModelPart.Vertex(
 						stringStartX + ((i+1)*stringWidth),
 						pole1Height,
 						string1Z,
 						0,0);
-				vert1 = new PositionTextureVertex(
+				vert1 = new ModelPart.Vertex(
 						stringStartX + stringWidth + ((i+1)*stringWidth),
 						pole1Height,
 						string1Z,
 						0,8);
-				vert2 = new PositionTextureVertex(
+				vert2 = new ModelPart.Vertex(
 						stringStartX + ((i+1)*stringWidth),
 						0,
 						stringStartZ,
 						8,0);
-				vert3 = new PositionTextureVertex(
+				vert3 = new ModelPart.Vertex(
 						stringStartX + stringWidth + ((i+1)*stringWidth),
 						0,
 						stringStartZ,
 						8,8);
 
-				finalString[i+1] = new TexturedQuad(new PositionTextureVertex[] {vert2, vert3, vert1, vert0}, 
+				finalString[i+1] = new ModelPart.Quad(new ModelPart.Vertex[] {vert2, vert3, vert1, vert0},
 						0, 0, 1, (int)string1FinalLength, 16, 16);
 			}
 		}
-		vert0 = new PositionTextureVertex(
+		vert0 = new ModelPart.Vertex(
 				stringStartX,
 				14.5F,
 				stringStartZ,
 				0,0);
-		vert1 = new PositionTextureVertex(
+		vert1 = new ModelPart.Vertex(
 				stringStartX + (numStrings*stringWidth),
 				14.5F,
 				stringStartZ,
 				0,8);
-		vert2 = new PositionTextureVertex(
+		vert2 = new ModelPart.Vertex(
 				stringStartX,
 				14.5F - (cloth*stringWidth),
 				stringStartZ,
 				8,0);
-		vert3 = new PositionTextureVertex(
+		vert3 = new ModelPart.Vertex(
 				stringStartX + (numStrings*stringWidth),
 				14.5F - (cloth*stringWidth),
 				stringStartZ,
 				8,8);
 
-		clothRender = new TexturedQuad(new PositionTextureVertex[] {vert0, vert1, vert3, vert2}, 
+		clothRender = new ModelPart.Quad(new ModelPart.Vertex[] {vert0, vert1, vert3, vert2},
 				0, 0, 16, cloth, 16, 16);
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_CULL_FACE);
